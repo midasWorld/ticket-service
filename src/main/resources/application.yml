@@ -20,3 +20,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  flyway:
+    enabled: false
+    baseline-on-migrate: false
