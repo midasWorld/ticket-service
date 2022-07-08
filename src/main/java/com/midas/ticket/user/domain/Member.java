@@ -38,6 +38,11 @@ public class Member {
 
 	@Builder
 	public Member(String email, String password, String name) {
+		this(null, email, password, name);
+	}
+
+	public Member(Long id, String email, String password, String name) {
+		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
