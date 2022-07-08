@@ -38,3 +38,6 @@ out/
 
 ### Node JS ###
 node_modules
+
+### Flyway ###
+flyway.conf
