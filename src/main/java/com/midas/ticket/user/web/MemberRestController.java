@@ -14,6 +14,10 @@ import com.midas.ticket.user.dto.JoinRequest;
 import com.midas.ticket.user.dto.MemberResponse;
 import com.midas.ticket.user.service.MemberService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "회원 API")
 @RestController
 @RequestMapping("/api/v1/members")
 public class MemberRestController {
@@ -24,6 +28,8 @@ public class MemberRestController {
 		this.memberService = memberService;
 	}
 
+
+	@Operation(summary = "회원 가입")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ApiResponse<MemberResponse> join(@RequestBody JoinRequest request) {

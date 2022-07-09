@@ -5,9 +5,17 @@ import java.time.LocalDateTime;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class ApiResponse<T> {
+
+	@Schema(description = "API 요청 처리 결과", required = true)
 	private final boolean success;
+
+	@Schema(description = "success가 true라면, API 요청 처리 응답값")
 	private final T response;
+
+	@Schema(description = "success가 false라면, API 요청 처리 응답값")
 	private final ApiError error;
 
 	public ApiResponse(boolean success, T response, ApiError error) {
