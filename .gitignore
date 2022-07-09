@@ -40,4 +40,7 @@ out/
 node_modules
 
 ### Flyway ###
-flyway.conf
+src/main/resources/db/local-config/flyway.conf
+
+### .ENV ###
+.env
