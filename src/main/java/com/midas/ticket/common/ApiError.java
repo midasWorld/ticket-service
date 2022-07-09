@@ -5,9 +5,14 @@ import java.time.LocalDateTime;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class ApiError {
 
+	@Schema(description = "오류 발생 시간", required = true)
 	private final LocalDateTime timestamp;
+
+	@Schema(description = "오류 메시지", required = true)
 	private final String message;
 
 	public ApiError(LocalDateTime timestamp, String message) {
