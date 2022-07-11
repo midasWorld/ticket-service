@@ -41,8 +41,4 @@
         <appender-ref ref="DB_FILE"/>
     </logger>
 
-    <logger name="jdbc.sqlonly" level="INFO">
-        <appender-ref ref="DB_FILE" />
-    </logger>
-
 </included>
