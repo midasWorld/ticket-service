@@ -37,6 +37,9 @@ dependencies {
     // SPRING DOCS
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
 
+    // JASYPT
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
