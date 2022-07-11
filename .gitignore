@@ -44,3 +44,6 @@ src/main/resources/db/local-config/flyway.conf
 
 ### .ENV ###
 .env
+
+### Log ###
+log/
