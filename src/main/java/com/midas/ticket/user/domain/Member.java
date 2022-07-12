@@ -48,6 +48,13 @@ public class Member {
 		this.name = name;
 	}
 
+	//== 비지니스 로직 ==//
+	public void login(String password) {
+		if (!password.equals(this.password)) {
+			throw new IllegalArgumentException("Bad credential");
+		}
+	}
+
 	public Long getId() {
 		return id;
 	}
