@@ -3,6 +3,7 @@ package com.midas.ticket.user.repository;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
@@ -32,6 +33,20 @@ class MemberRepositoryTest {
 		Member savedMember = memberRepository.save(newMember);
 
 		assertThat(savedMember.getId(), notNullValue());
+	}
+
+	@Test
+	@DisplayName("회원 이메일로 조회된다.")
+	void test_findByEmail() {
+		// given
+		Member savedMember = memberRepository.save(newMember);
+
+		// when
+		Optional<Member> foundMember = memberRepository.findByEmail(savedMember.getEmail());
+
+		// then
+		assertThat(foundMember.isEmpty(), is(false));
+		assertThat(foundMember.get(), samePropertyValuesAs(savedMember));
 	}
 
 	@Test

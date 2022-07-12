@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.midas.ticket.user.dto.JoinRequest;
+import com.midas.ticket.user.dto.LoginRequest;
 import com.midas.ticket.user.dto.MemberResponse;
 import com.midas.ticket.user.service.MemberService;
 
@@ -35,15 +36,16 @@ class MemberRestControllerTest {
 	@MockBean
 	private MemberService memberService;
 
+	private static final Long ID = 1L;
+	private static final String EMAIL = "test77@gmail.com";
+	private static final String PASSWORD = "1234";
+	private static final String NAME = "test77";
+
 	@Test
 	@DisplayName("사용자가 회원가입 한다.")
 	void test_join() throws Exception {
-		final String email = "test77@gmail.com";
-		final String password = "1234";
-		final String name = "test77";
-
-		JoinRequest joinRequest = new JoinRequest(email, password, name);
-		MemberResponse memberResponse = new MemberResponse(1L, name);
+		JoinRequest joinRequest = new JoinRequest(EMAIL, PASSWORD, NAME);
+		MemberResponse memberResponse = new MemberResponse(ID, NAME);
 
 		String request = objectMapper.writeValueAsString(joinRequest);
 		String response = objectMapper.writeValueAsString(OK(memberResponse));
@@ -61,6 +63,31 @@ class MemberRestControllerTest {
 
 		perform
 			.andExpect(status().isCreated())
+			.andExpect(content().string(response));
+	}
+
+	@Test
+	@DisplayName("사용자가 로그인 한다.")
+	void test_login() throws Exception {
+		LoginRequest loginRequest = new LoginRequest(EMAIL, PASSWORD);
+		MemberResponse memberResponse = new MemberResponse(ID, NAME);
+
+		String request = objectMapper.writeValueAsString(loginRequest);
+		String response = objectMapper.writeValueAsString(OK(memberResponse));
+
+		given(memberService.login(anyString(), anyString())).willReturn(memberResponse);
+
+		// when
+		ResultActions perform = mockMvc.perform(post(API_URL + "/login")
+			.content(request)
+			.contentType(APPLICATION_JSON)
+		);
+
+		// then
+		verify(memberService).login(anyString(), anyString());
+
+		perform
+			.andExpect(status().isOk())
 			.andExpect(content().string(response));
 	}
 }
