@@ -21,4 +21,12 @@ public class MemberService {
 
 		return new MemberResponse(savedMember.getId(), name);
 	}
+
+	public MemberResponse login(String principal, String credentials) {
+
+		Member member = memberRepository.findByEmail(principal)
+			.orElseThrow(() -> new IllegalArgumentException("Could not found User with email=" + principal));
+		member.login(credentials);
+		return new MemberResponse(member.getId(), member.getName());
+	}
 }

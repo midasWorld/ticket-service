@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.midas.ticket.common.ApiResponse;
 import com.midas.ticket.user.dto.JoinRequest;
+import com.midas.ticket.user.dto.LoginRequest;
 import com.midas.ticket.user.dto.MemberResponse;
 import com.midas.ticket.user.service.MemberService;
 
@@ -34,6 +35,15 @@ public class MemberRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ApiResponse<MemberResponse> join(@RequestBody JoinRequest request) {
 		MemberResponse member = memberService.join(request.getPrincipal(), request.getCredentials(), request.getName());
+
+		return OK(member);
+	}
+
+	@Operation(summary = "로그인")
+	@PostMapping("/login")
+	@ResponseStatus(HttpStatus.OK)
+	public ApiResponse<MemberResponse> login(@RequestBody LoginRequest request) {
+		MemberResponse member = memberService.login(request.getPrincipal(), request.getCredentials());
 
 		return OK(member);
 	}
